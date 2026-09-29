@@ -1,0 +1,110 @@
+<ItemEstacionamento>:
+    orientation: "horizontal"
+    size_hint_y: None
+    height: dp(56)
+    spacing: dp(12)
+    padding: [dp(16), dp(8), dp(16), dp(8)]
+
+    canvas.before:
+        Color:
+            rgba: app.cor_borda_card
+        Line:
+            rounded_rectangle: [self.x, self.y, self.width, self.height, dp(12)]
+            width: dp(1.5)
+
+
+<NomeEstacionamento>:
+    theme_text_color: "Custom"
+
+
+<BadgeVagas>:
+    size_hint: None, None
+    size: dp(64), dp(32)
+    pos_hint: {"center_y": 0.5}
+
+
+<BotaoVoltar>:
+    size_hint: None, None
+    size: dp(40), dp(40)
+    theme_text_color: "Custom"
+
+
+<TelaPrincipal>:
+    md_bg_color: app.cor_fundo
+
+    MDLabel:
+        id: label_vazio
+        text: "Nenhum estacionamento encontrado"
+        halign: "center"
+        theme_text_color: "Custom"
+        text_color: app.cor_texto
+        pos_hint: {"center_x": 0.5, "center_y": 0.55}
+        opacity: 1 if not app.estacionamentos else 0
+
+    ScrollView:
+        size_hint: 1, 0.6
+        pos_hint: {"center_x": 0.5, "top": 0.92}
+        do_scroll_x: False
+
+        MDBoxLayout:
+            id: lista_estacionamentos
+            orientation: "vertical"
+            spacing: dp(12)
+            padding: dp(16)
+            adaptive_height: True
+            size_hint_x: 1
+
+    MDButton:
+        style: "filled"
+        size_hint: None, None
+        size: dp(56), dp(56)
+        radius: [28, 28, 28, 28]
+        line_color: app.cor_borda_card
+        pos_hint: {"center_x": 0.5, "center_y": 0.1}
+        on_release: app.conectar()
+
+        MDButtonText:
+            text: "+"
+            halign: "center"
+            valign: "center"
+
+
+<TelaPin>:
+    md_bg_color: app.cor_fundo
+
+    MDIconButton:
+        icon: "arrow-left"
+        theme_icon_color: "Custom"
+        icon_color: app.cor_texto
+        pos_hint: {"x": 0.02, "top": 0.98}
+        on_release: root.manager.current = "principal"
+
+    MDBoxLayout:
+        orientation: "vertical"
+        spacing: dp(20)
+        padding: dp(24)
+        size_hint: None, None
+        size: dp(280), dp(160)
+        pos_hint: {"center_x": 0.5, "center_y": 0.5}
+
+        MDLabel:
+            text: "Digite o PIN"
+            halign: "center"
+            theme_text_color: "Custom"
+            text_color: app.cor_texto
+
+        MDTextField:
+            id: campo_pin
+            hint_text: "0000"
+            input_filter: "int"
+            halign: "center"
+            max_text_length: 4
+            on_text: if len(self.text) > 4: self.text = self.text[:4]
+
+        MDButton:
+            style: "filled"
+            pos_hint: {"center_x": 0.5}
+            on_release: root.confirmar_pin(campo_pin.text)
+
+            MDButtonText:
+                text: "Confirmar"
