@@ -185,6 +185,7 @@ O desenvolvimento pode seguir esta ordem:
 - [ ] Definir a exibição individual das vagas.
 - [ ] Adicionar mensagens visuais de erro e confirmação.
 - [ ] Ajustar a interface para diferentes tamanhos de tela.
+- [ ] Colocar um mapa mostrando a vaga
 
 Responsável: equipe de layout.
 
