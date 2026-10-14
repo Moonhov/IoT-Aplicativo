@@ -1,0 +1,2 @@
+# Dependência adicional da integração USB; Kivy/KivyMD já estão instalados.
+pyserial==3.5
